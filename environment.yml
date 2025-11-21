@@ -1,0 +1,13 @@
+name: nvidia-labs
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - jupyterlab
+  - ipykernel
+  - ansible
+  - git
+  - pip:
+    - nbformat>=5.0
