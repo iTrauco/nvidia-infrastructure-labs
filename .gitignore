@@ -80,3 +80,6 @@ archives/
 
 # Keep directory structures
 !*/.gitkeep
+provenance/chain.jsonl      # Raw data stays local
+!provenance/chain_clean.jsonl  # Sanitized goes to GitHub
+.env
