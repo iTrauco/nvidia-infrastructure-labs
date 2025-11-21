@@ -1,0 +1,82 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+*-checkpoint.ipynb
+
+# Conda
+conda-meta/
+*.conda
+*.tar.bz2
+
+# Provenance (local only)
+provenance/chain.jsonl
+provenance/.integrity/
+provenance/nodes/
+provenance/snapshots/
+provenance/chain_clean.jsonl
+
+# Keep provenance directory structure
+!provenance/.gitkeep
+!provenance/README.md
+
+# Secrets and configs
+.env
+*.key
+*.pem
+*.crt
+credentials.yml
+*_api_key*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# NVIDIA/CUDA
+*.nsys-rep
+*.sqlite
+*.nvvp
+*.log
+nohup.out
+
+# Slurm
+slurm-*.out
+
+# Kubernetes
+*.kubeconfig
+kubeconfig
+
+# Docker
+.dockerignore
+
+# Test artifacts
+*.tmp
+*.cache
+test_results/
+
+# Archives
+*.tar.gz
+*.zip
+archives/
+
+# Keep directory structures
+!*/.gitkeep
