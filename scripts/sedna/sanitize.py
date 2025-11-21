@@ -46,7 +46,7 @@ def sanitize_chain():
     
     # Use env override or map from hostname
     sanitize_host = os.getenv('SANITIZE_HOSTNAME') or get_node_id()
-    sanitize_user = os.getenv('SANITIZE_USER', 'user')
+    sanitize_user = os.getenv('SANITIZE_USER', 'examprep')
     
     with open(CHAIN_FILE, 'r') as f_in, open(clean_file, 'w') as f_out:
         for line in f_in:
@@ -56,6 +56,8 @@ def sanitize_chain():
             if 'context' in entry:
                 entry['context']['hostname'] = sanitize_host
                 entry['context']['user'] = sanitize_user
+            
+            # Files field passes through unchanged (already just hashes)
             
             json.dump(entry, f_out)
             f_out.write('\n')
