@@ -1,21 +1,20 @@
-"""Scripts package root"""
+"""SEDNA - Forensic tracking for NVIDIA infrastructure"""
 from pathlib import Path
 
-def get_repo_root():
-    """Find repo root - never fails"""
-    current = Path(__file__).resolve().parent.parent
-    
-    # Try 1: Look for .git
-    if (current / '.git').exists():
-        return current
-    
-    # Try 2: Look for provenance dir
-    if (current / 'provenance').exists():
-        return current
-    
-    # Fallback
-    return current
+# For package use
+try:
+    from sedna.track.track import Tracker
+    from sedna.verify.verify import Verifier
+    from sedna.sanitize.sanitize import Sanitizer
+except ImportError:
+    # For local development
+    from scripts.sedna.track.track import Tracker
+    from scripts.sedna.verify.verify import Verifier
+    from scripts.sedna.sanitize.sanitize import Sanitizer
 
-REPO_ROOT = get_repo_root()
+# Global instances
+tracker = Tracker()
+verifier = Verifier()
 
-__all__ = ['REPO_ROOT']
+__version__ = "0.1.0"
+__all__ = ["tracker", "verifier", "Tracker", "Verifier", "Sanitizer"]

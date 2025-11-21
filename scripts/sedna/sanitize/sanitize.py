@@ -1,69 +1,59 @@
 #!/usr/bin/env python3
-"""Sanitize chain.jsonl for public commits"""
-
+"""Sanitization module - removes sensitive data"""
 import json
-import sys
-import os
-import socket
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-from scripts.sedna import CHAIN_FILE, PROVENANCE_DIR
 
-def get_node_id():
-    """Map current hostname to clean node ID"""
-    hostname = socket.gethostname().lower()
+class Sanitizer:
+    def sanitize_entry(self, entry):
+        """Sanitize a single chain entry"""
+        clean = entry.copy()
+        
+        # Sanitize hostname
+        if "host" in clean:
+            hostname = clean["host"].lower()
+            if "w32445" in hostname or "zenon" in hostname:
+                clean["host"] = "node-001"
+            elif "w52445" in hostname or "gemini" in hostname:
+                clean["host"] = "node-002"
+            elif "control" in hostname:
+                clean["host"] = "control"
+            else:
+                clean["host"] = f"node-{hostname[:4]}"
+        
+        # Legacy support for 'context' field
+        if "context" in clean:
+            if "hostname" in clean["context"]:
+                hostname = clean["context"]["hostname"].lower()
+                if "w32445" in hostname or "zenon" in hostname:
+                    clean["context"]["hostname"] = "node-001"
+                elif "w52445" in hostname or "gemini" in hostname:
+                    clean["context"]["hostname"] = "node-002"
+                else:
+                    clean["context"]["hostname"] = f"node-{hostname[:4]}"
+            if "user" in clean["context"]:
+                clean["context"]["user"] = "user"
+        
+        # Sanitize username
+        if "user" in clean:
+            clean["user"] = "examprep"
+        
+        return clean
     
-    # Map hostnames to clean IDs
-    if 'w32445' in hostname or 'zenon' in hostname:
-        return 'node-001'
-    elif 'w52445' in hostname or 'gemini' in hostname:
-        return 'node-002'
-    elif 'control' in hostname:
-        return 'control'
-    else:
-        # Unknown host - use first 4 chars of hostname
-        return f"node-{hostname[:4]}"
+    def sanitize_file(self, input_file="provenance/chain.jsonl", 
+                      output_file="provenance/chain_clean.jsonl"):
+        """Sanitize entire chain file"""
+        with open(input_file, 'r') as f_in, open(output_file, 'w') as f_out:
+            for line in f_in:
+                entry = json.loads(line)
+                clean_entry = self.sanitize_entry(entry)
+                json.dump(clean_entry, f_out)
+                f_out.write('\n')
+        return output_file
 
-def load_env():
-    env_file = Path.cwd() / '.env'
-    if env_file.exists():
-        with open(env_file) as f:
-            for line in f:
-                if '=' in line and not line.startswith('#'):
-                    key, value = line.strip().split('=', 1)
-                    os.environ[key] = value
 
-def sanitize_chain():
-    """Remove sensitive data from chain"""
-    load_env()
-    
-    if not CHAIN_FILE.exists():
-        print("No chain.jsonl to sanitize")
-        return
-    
-    clean_file = PROVENANCE_DIR / 'chain_clean.jsonl'
-    
-    # Use env override or map from hostname
-    sanitize_host = os.getenv('SANITIZE_HOSTNAME') or get_node_id()
-    sanitize_user = os.getenv('SANITIZE_USER', 'examprep')
-    
-    with open(CHAIN_FILE, 'r') as f_in, open(clean_file, 'w') as f_out:
-        for line in f_in:
-            entry = json.loads(line)
-            
-            # Sanitize context if present
-            if 'context' in entry:
-                entry['context']['hostname'] = sanitize_host
-                entry['context']['user'] = sanitize_user
-            
-            # Files field passes through unchanged (already just hashes)
-            
-            json.dump(entry, f_out)
-            f_out.write('\n')
-    
-    print(f"✓ Sanitized: {clean_file} (as {sanitize_host})")
-    return clean_file
-
+# Test
 if __name__ == "__main__":
-    sanitize_chain()
+    sanitizer = Sanitizer()
+    test = {"host": "test-hostname", "user": "testuser", "action": "test"}
+    print("Original:", test)
+    print("Sanitized:", sanitizer.sanitize_entry(test))

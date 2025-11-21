@@ -7,3 +7,22 @@
 {"timestamp": "2025-11-21T17:09:08.092687Z", "action": "test with context", "context": {"hostname": "node-002", "user": "examprep", "platform": "Linux", "python": "3.11.14"}}
 {"timestamp": "2025-11-21T17:33:47.526064Z", "action": "test_with_files", "context": {"hostname": "node-002", "user": "examprep", "platform": "Linux", "python": "3.11.14"}, "files": {"test.txt": "6ae8a75555209fd6c44157c0aed8016e763ff435a19cf186f76863140143ff72"}}
 {"timestamp": "2025-11-21T17:34:08.007082Z", "action": "config_change", "context": {"hostname": "node-002", "user": "examprep", "platform": "Linux", "python": "3.11.14"}, "files": {"environment.yml": "66100ff73767b98edb1b82738fe7ac939b67e027b42ba8ecca2051203e99de52", "README.md": "b7c1a79ad3f4ecf5dd4d5abb6e77d28251eded187116bb070438e69620b4303d"}}
+{"timestamp": "2025-11-21T18:33:00.139356Z", "action": "test_action", "host": "node-002", "user": "user", "files": {"README.md": "b7c1a79ad3f4ecf5dd4d5abb6e77d28251eded187116bb070438e69620b4303d"}, "test_data": "hello"}
+{"timestamp": "2025-11-21T18:34:10.422753Z", "action": "test_action", "host": "node-002", "user": "examprep", "files": {"README.md": "b7c1a79ad3f4ecf5dd4d5abb6e77d28251eded187116bb070438e69620b4303d"}, "test_data": "hello"}
+{"timestamp": "2025-11-21T18:35:04.839031Z", "action": "test_action", "host": "node-002", "user": "examprep", "files": {"README.md": "b7c1a79ad3f4ecf5dd4d5abb6e77d28251eded187116bb070438e69620b4303d"}, "test_data": "hello"}
+{"timestamp": "2025-11-21T18:35:15.545058Z", "action": "test_action", "host": "node-002", "user": "examprep", "files": {"README.md": "b7c1a79ad3f4ecf5dd4d5abb6e77d28251eded187116bb070438e69620b4303d"}, "test_data": "hello"}
+{"timestamp": "2025-11-21T18:44:55.062837Z", "action": "test_action", "host": "node-002", "user": "examprep", "files": {}, "test_data": "hello"}
+{"timestamp": "2025-11-21T18:47:49.626655Z", "action": "lab_01_started", "host": "node-002", "user": "examprep"}
+{"timestamp": "2025-11-21T18:49:59.343881Z", "action": "started_session", "host": "node-002", "user": "examprep"}
+{"timestamp": "2025-11-21T18:49:59.343990Z", "action": "configured_gpu", "host": "node-002", "user": "examprep", "gpu_count": 2, "cuda_version": "12.1"}
+{"timestamp": "2025-11-21T18:49:59.344130Z", "action": "created_config", "host": "node-002", "user": "examprep", "files": {"README.md": "b7c1a79ad3f4ecf5dd4d5abb6e77d28251eded187116bb070438e69620b4303d"}}
+{"timestamp": "2025-11-21T18:49:59.344234Z", "action": "lab_01_slurm_started", "host": "node-002", "user": "examprep"}
+{"timestamp": "2025-11-21T18:49:59.344275Z", "action": "installed_packages", "host": "node-002", "user": "examprep", "packages": ["slurm", "munge"]}
+{"timestamp": "2025-11-21T18:49:59.344313Z", "action": "configured_slurm", "host": "node-002", "user": "examprep", "files": {}}
+{"timestamp": "2025-11-21T18:49:59.344368Z", "action": "submitted_job", "host": "node-002", "user": "examprep", "job_id": "12345", "nodes": 2}
+{"timestamp": "2025-11-21T18:49:59.344402Z", "action": "job_completed", "host": "node-002", "user": "examprep", "runtime_seconds": 45.2}
+{"timestamp": "2025-11-21T18:49:59.344441Z", "action": "lab_01_slurm_completed", "host": "node-002", "user": "examprep", "score": 95}
+{"timestamp": "2025-11-21T18:49:59.344496Z", "action": "error_occurred", "host": "node-002", "user": "examprep", "error": "CUDA out of memory", "script": "train.py", "batch_size": 256}
+{"timestamp": "2025-11-21T18:49:59.344544Z", "action": "applied_fix", "host": "node-002", "user": "examprep", "fix": "reduced batch size", "new_batch_size": 128}
+{"timestamp": "2025-11-21T18:49:59.344578Z", "action": "fix_confirmed", "host": "node-002", "user": "examprep", "success": true}
+{"timestamp": "2025-11-21T18:49:59.344679Z", "action": "created_test_file", "host": "node-002", "user": "examprep", "files": {"test_config.yml": "5080949ad62cb0b69a4bb42468862e9966420c8178118626567478548fa75260"}}
