@@ -83,3 +83,9 @@ archives/
 provenance/chain.jsonl      # Raw data stays local
 !provenance/chain_clean.jsonl  # Sanitized goes to GitHub
 .env
+provenance/chain.jsonl
+*.egg-info/
+build/
+dist/
+provenance/chain.jsonl
+*.egg-info/

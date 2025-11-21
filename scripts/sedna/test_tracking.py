@@ -80,8 +80,9 @@ def test_verification():
 def check_output():
     """Show what was created"""
     print("\n=== OUTPUT CHECK ===")
-    chain_file = Path("/home/trauco/nvidia-infrastructure-labs/provenance/chain.jsonl")
-    clean_file = Path("/home/trauco/nvidia-infrastructure-labs/provenance/chain_clean.jsonl")
+    repo_root = Path(__file__).parent.parent.parent
+    chain_file = repo_root / "provenance" / "chain.jsonl"
+    clean_file = repo_root / "provenance" / "chain_clean.jsonl"
     
     if chain_file.exists():
         with open(chain_file) as f:
